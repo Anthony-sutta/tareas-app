@@ -5,10 +5,12 @@ export default function Tarea({ tarea, onEliminar, onToggle, onEditar }) {
   const [borrador, setBorrador] = useState(tarea.titulo);
   const temporizadorClick = useRef(null);
   const inputRef = useRef(null);
+  const yaGuardo = useRef(false);
 
   // Enfocar y seleccionar el texto al entrar en modo edicion
   useEffect(() => {
     if (editando) {
+      yaGuardo.current = false;
       setBorrador(tarea.titulo);
       inputRef.current?.focus();
       inputRef.current?.select();
@@ -17,6 +19,8 @@ export default function Tarea({ tarea, onEliminar, onToggle, onEditar }) {
   }, [editando]);
 
   function guardar() {
+    if (yaGuardo.current) return; // evita doble PUT por Enter + blur
+    yaGuardo.current = true;
     const limpio = borrador.trim();
     setEditando(false);
     if (limpio && limpio !== tarea.titulo) {

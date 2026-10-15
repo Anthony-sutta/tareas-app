@@ -35,7 +35,7 @@ app.put("/api/tareas/:id", (req, res) => {
 
   // Reto Oro: permitir editar el titulo con PUT { titulo: "nuevo" }
   if (req.body.titulo !== undefined) {
-    if (!req.body.titulo.trim()) {
+    if (typeof req.body.titulo !== "string" || !req.body.titulo.trim()) {
       return res.status(400).json({ error: "El titulo no puede estar vacio" });
     }
     tarea.titulo = req.body.titulo.trim();
