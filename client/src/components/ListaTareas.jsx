@@ -1,6 +1,6 @@
 import Tarea from "./Tarea.jsx";
 
-export default function ListaTareas({ tareas, onEliminar, onToggle }) {
+export default function ListaTareas({ tareas, onEliminar, onToggle, onEditar }) {
   if (tareas.length === 0) {
     return <p className="vacio">No hay tareas. Agrega una 🎉</p>;
   }
@@ -13,6 +13,7 @@ export default function ListaTareas({ tareas, onEliminar, onToggle }) {
           tarea={t}
           onEliminar={() => onEliminar(t.id)}
           onToggle={() => onToggle(t.id)}
+          onEditar={(titulo) => onEditar(t.id, titulo)}
         />
       ))}
     </ul>

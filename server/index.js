@@ -28,11 +28,27 @@ app.post("/api/tareas", (req, res) => {
   res.status(201).json(nueva);
 });
 
-// PUT - Marcar/desmarcar como completada
+// PUT - Marcar/desmarcar como completada y/o editar el titulo
 app.put("/api/tareas/:id", (req, res) => {
   const tarea = tareas.find((t) => t.id === Number(req.params.id));
   if (!tarea) return res.status(404).json({ error: "Tarea no encontrada" });
-  tarea.completada = req.body.completada ?? !tarea.completada;
+
+  // Reto Oro: permitir editar el titulo con PUT { titulo: "nuevo" }
+  if (req.body.titulo !== undefined) {
+    if (!req.body.titulo.trim()) {
+      return res.status(400).json({ error: "El titulo no puede estar vacio" });
+    }
+    tarea.titulo = req.body.titulo.trim();
+  }
+
+  // Completada: si viene en el body se usa, si no viene Y tampoco viene
+  // titulo, se mantiene el comportamiento original de alternar (toggle).
+  if (typeof req.body.completada === "boolean") {
+    tarea.completada = req.body.completada;
+  } else if (req.body.titulo === undefined) {
+    tarea.completada = !tarea.completada;
+  }
+
   res.json(tarea);
 });
 

@@ -59,3 +59,38 @@ h1 { margin-bottom: 20px; }
 }
 
 .estado, .vacio { text-align: center; opacity: 0.7; margin-top: 20px; }
+
+/* 🥉 Reto Bronce: contador */
+.contador {
+  text-align: center;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+/* 🥈 Reto Plata: boton eliminar completadas */
+.btn-limpiar {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 10px;
+  border: 1px solid #5a3d3d;
+  border-radius: 8px;
+  background: #3e2a2a;
+  color: #ffb4b4;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.btn-limpiar:hover:not(:disabled) { background: #4e3434; }
+.btn-limpiar:disabled { opacity: 0.6; cursor: wait; }
+
+/* 🥇 Reto Oro: input de edicion */
+.input-editar {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #7c5cff;
+  background: #1e1e2e;
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 8px;
+}
